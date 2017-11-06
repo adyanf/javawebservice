@@ -7,10 +7,15 @@ package org.IdentityService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -70,7 +75,61 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        JSONObject json = new JSONObject();
+        try {
+            PrintWriter out = response.getWriter();
+            Connection conDB = ConnectDBAccount.getConnection();
+            if (conDB != null){
+                Statement stmt = conDB.createStatement();
+                String sql_query;
+                
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                
+                sql_query = "select * from account where "
+                        + "(email = \""+ username +"\" and password = \""+ password +"\")";
+                ResultSet result = stmt.executeQuery(sql_query);
+//                
+                if (result.next()){
+                    int id = -9;
+                    //TODO: ID USER
+//                    while (result.next()) {
+                       id = result.getInt("id");
+//                    }
+                    
+                    //TODO: GENERATE TOKEN
+                    String token = "sd78asd6h3cv2m1yu5ert23c5jc" + id;
+                    String expiry_time = "2017-10-10";
+                    
+                    sql_query = "insert into token (id, access_token, expiry_time)"
+                            + " VALUES (\"" + id + "\", \"" + token +"\", \"" + expiry_time +"\")";
+                    stmt.executeUpdate(sql_query);
+                    
+                    json.put("success", true);
+                    json.put("access_token", token);
+                    json.put("expiry_time", expiry_time);
+                    out.print(json.toString());
+                }
+                else {
+                    json.put("success", false);
+                    json.put("message", "user doesn't exist");
+                    out.print(json.toString());
+                }
+            } else {
+                json.put("success", false);
+                json.put("status", "ERROR");
+                json.put("message", "can't connect to the database");
+                out.print(json.toString());
+            }
+            
+        } catch (SQLException ex) {
+            PrintWriter out = response.getWriter();
+//            System.out.println("Can't connect to database!");
+            json.put("success", false);
+            json.put("status", "ERROR : Can't connect to database!");
+            json.put("message", ex.getMessage());
+            out.print(json.toString());
+        }
     }
 
     /**

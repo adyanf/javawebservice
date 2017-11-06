@@ -7,23 +7,16 @@ package org.IdentityService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author adyan
  */
-public class logout extends HttpServlet {
+public class validate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +35,10 @@ public class logout extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet logout</title>");            
+            out.println("<title>Servlet validate</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet logout at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet validate at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,37 +56,7 @@ public class logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        JSONObject responseJSON = new JSONObject();
-        try {
-            PrintWriter out = response.getWriter();
-            Connection conDB = ConnectDBAccount.getConnection();
-            if (conDB != null){
-                Statement stmt = conDB.createStatement();
-                String sql_query;
-                
-                String token = request.getParameter("token");
-              
-                sql_query = "SELECT * FROM token WHERE access_token=\""+ token +"\"";
-                ResultSet rs = stmt.executeQuery(sql_query);
-                
-                String username;
-                if (rs.next()) {
-                    sql_query = "UPDATE token SET expiry_time = 0 WHERE access_token=\""+token+"\"";
-                    stmt.executeUpdate(sql_query);
-                    String message = "User telah logout.";
-                    responseJSON.put("status","OK");
-                    responseJSON.put("message", message);
-                    out.println(responseJSON.toString());
-                }
-                else {
-                    responseJSON.put("status","ERROR");
-                    responseJSON.put("message", "User tidak ditemukan");
-                    out.println(responseJSON.toString());
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(logout.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

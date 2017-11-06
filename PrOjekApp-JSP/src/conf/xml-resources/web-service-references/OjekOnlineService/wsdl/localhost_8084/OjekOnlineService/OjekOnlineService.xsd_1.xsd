@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://OjekOnlineService.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://OjekOnlineService.org/">
+
+<xs:element name="add_driver_location" type="tns:add_driver_location" />
+
+<xs:element name="add_driver_locationResponse" type="tns:add_driver_locationResponse" />
+
+<xs:element name="add_order" type="tns:add_order" />
+
+<xs:element name="add_orderResponse" type="tns:add_orderResponse" />
+
+<xs:element name="get_all_driver" type="tns:get_all_driver" />
+
+<xs:element name="get_all_driverResponse" type="tns:get_all_driverResponse" />
+
+<xs:element name="get_driver_history" type="tns:get_driver_history" />
+
+<xs:element name="get_driver_historyResponse" type="tns:get_driver_historyResponse" />
+
+<xs:element name="get_driver_locations" type="tns:get_driver_locations" />
+
+<xs:element name="get_driver_locationsResponse" type="tns:get_driver_locationsResponse" />
+
+<xs:element name="get_not_preferred_driver" type="tns:get_not_preferred_driver" />
+
+<xs:element name="get_not_preferred_driverResponse" type="tns:get_not_preferred_driverResponse" />
+
+<xs:element name="get_order_hstory" type="tns:get_order_hstory" />
+
+<xs:element name="get_order_hstoryResponse" type="tns:get_order_hstoryResponse" />
+
+<xs:element name="get_preferred_driver" type="tns:get_preferred_driver" />
+
+<xs:element name="get_preferred_driverResponse" type="tns:get_preferred_driverResponse" />
+
+<xs:element name="get_profile" type="tns:get_profile" />
+
+<xs:element name="get_profileResponse" type="tns:get_profileResponse" />
+
+<xs:element name="update_driver_location" type="tns:update_driver_location" />
+
+<xs:element name="update_driver_locationResponse" type="tns:update_driver_locationResponse" />
+
+<xs:element name="update_profile" type="tns:update_profile" />
+
+<xs:element name="update_profileResponse" type="tns:update_profileResponse" />
+
+<xs:complexType name="get_profile">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_profileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_driver_location">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+<xs:element name="oldLocation" type="xs:string" minOccurs="0" />
+<xs:element name="newLocation" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_driver_locationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="add_driver_location">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+<xs:element name="location" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="add_driver_locationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_driver_locations">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_driver_locationsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_driver_history">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_driver_historyResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_all_driver">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_all_driverResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_preferred_driver">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+<xs:element name="query" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_preferred_driverResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_profile">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+<xs:element name="name" type="xs:string" minOccurs="0" />
+<xs:element name="phone" type="xs:string" minOccurs="0" />
+<xs:element name="image" type="xs:string" minOccurs="0" />
+<xs:element name="driver" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_profileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_order_hstory">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_order_hstoryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_not_preferred_driver">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+<xs:element name="query" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_not_preferred_driverResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="add_order">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+<xs:element name="idDriver" type="xs:int" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="rating" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="add_orderResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

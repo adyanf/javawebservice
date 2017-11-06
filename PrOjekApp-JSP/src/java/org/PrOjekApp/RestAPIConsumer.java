@@ -58,7 +58,7 @@ public class RestAPIConsumer {
             dts.writeBytes(URLParameters);
             dts.flush();
             dts.close();
-            conn.setReadTimeout(10000);
+            conn.setReadTimeout(15000);
             conn.connect();
             BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
             StringBuilder sb = new StringBuilder();

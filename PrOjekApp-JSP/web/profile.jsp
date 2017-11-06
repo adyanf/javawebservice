@@ -4,9 +4,26 @@
     Author     : adyan
 --%>
 
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.PrOjekApp.RestAPIConsumer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%
+        String token = request.getParameter("token");
+        
+        if (request.getParameter("logout") != null){
+            String API_URL = "http://localhost:8084/IdentityService/logout?";
+            String URLParameters = "token="+ token;
+            RestAPIConsumer rc = new RestAPIConsumer(API_URL, URLParameters);
+            rc.executeGet();
+            JSONObject jsonResponse = rc.getOutput();
+            
+            String status = (String)jsonResponse.get("status");
+            String message = (String)jsonResponse.get("message");
+            response.sendRedirect("http://localhost:8084/PrOjekApp-JSP/login.jsp?message="+ message);
+        }
+    %>
 <!--    <?php
         require('includes/config.php');
 
@@ -127,7 +144,7 @@
                     </div>
                     <div class="header2">
                             <div class="username">Hi, <span class="username bold"><?php echo $username ?>!</span></div>
-                            <div class="logout"><a href="login.php">Logout</a></div>
+                            <div class="logout"><a href="/PrOjekApp-JSP/profile.jsp?token=<%= token %>&logout=true">Logout</a></div>
                     </div>
             </div>
             <div>

@@ -34,47 +34,9 @@
                 String message = (String)jsonResponse.get("message");
                 response.sendRedirect("http://localhost:8084/PrOjekApp-JSP/register.jsp?"
                 + "message=" + message);
-            }
-            
+            } 
         }
     %>
-<!--    <?php
-        if(isset($_POST["submit"])){
-            if($_POST["password"] !== $_POST["password_conf"]){
-                echo "<script>alert('Your password is not match!')</script>";        
-            }
-            else {
-                $name = $_POST["name"];
-                $username = $_POST["username"];
-                $email = $_POST["email"];
-                $password = $_POST["password"];
-                $phone_number = $_POST["phone"];
-                $driver = (!isset($_POST["driver"])) ? 0 : 1;
-
-                $sql = "INSERT INTO users (name, username, email, password, phone_number, driver)
-                VALUES ('$name', '$username', '$email', '$password', '$phone_number', $driver)";
-
-                if ($conn->query($sql) === TRUE) {
-                    $sql = "SELECT ID FROM users WHERE username = '$username' LIMIT 1";
-                    $result = mysqli_query($conn, $sql);
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $ID = $row["ID"];
-                    }
-                    if ($driver === 1){
-                        $sql = "INSERT INTO drivers (ID, name)
-                        VALUES ($ID,'$name')";
-                        if($conn->query($sql) === TRUE){
-                            echo "New driver record created successfully<br>";
-                        }
-                    }
-                    header('Location: profile.php?id_active=' . $ID);
-                    exit;                
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
-                }
-            }
-        }
-    ?>-->
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

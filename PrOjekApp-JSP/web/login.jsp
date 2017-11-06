@@ -14,6 +14,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%
+        String message = request.getParameter("message");
+    %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Halaman Login</title>
@@ -56,4 +59,9 @@
             </div>
         </div>
     </body>
+    <% if (request.getParameter("message") != null){
+        out.println("<script>alert(\"User telah logout\")</script>");
+    }
+    %>
+    
 </html>

@@ -4,8 +4,8 @@
     Author     : adyan
 --%>
 
+<%@page import="org.PrOjekApp.RestAPIConsumer"%>
 <%@page import="org.json.simple.JSONObject"%>
-<%@page import="org.kompas.PrOjekApp.RestAPI_consumer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,13 +22,14 @@
             String URLParameters = "name="+ name + "&username=" + username 
                     + "&email=" + email + "&password=" + password + "&phone="
                     + phone + "&driver=" + driver;
-            RestAPI_consumer rc = new RestAPI_consumer(API_URL, URLParameters);
+            RestAPIConsumer rc = new RestAPIConsumer(API_URL, URLParameters);
             rc.executePost();
             JSONObject jsonResponse = rc.getOutput();
             
             String status = (String)jsonResponse.get("status");
             if (status.equals("OK")){
-                response.sendRedirect("http://localhost:8084/PrOjekApp-JSP/profile.jsp");
+                String token = (String)jsonResponse.get("token");
+                response.sendRedirect("http://localhost:8084/PrOjekApp-JSP/profile.jsp?token=" + token);
             } else {
                 String message = (String)jsonResponse.get("message");
                 response.sendRedirect("http://localhost:8084/PrOjekApp-JSP/register.jsp?"

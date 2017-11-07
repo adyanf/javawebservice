@@ -20,6 +20,9 @@ public class TimeStamp {
     @XmlElement(name="date", required=true)
     private String date;
     
+    public TimeStamp(){
+        
+    }
     public TimeStamp(Timestamp t){
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(t.getTime());

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -89,21 +90,34 @@ public class login extends HttpServlet {
                 sql_query = "select * from account where "
                         + "(email = \""+ username +"\" and password = \""+ password +"\")";
                 ResultSet result = stmt.executeQuery(sql_query);
-//                
+
                 if (result.next()){
-                    int id = -9;
-                    //TODO: ID USER
-//                    while (result.next()) {
-                       id = result.getInt("id");
-//                    }
+                    int id = result.getInt("id");
+                    String token = "";
+                    long expiry_time = 0;
                     
-                    //TODO: GENERATE TOKEN
-                    String token = "sd78asd6h3cv2m1yu5ert23c5jc" + id;
-                    String expiry_time = "2017-10-10";
+                    Timestamp now = new Timestamp(System.currentTimeMillis());
+                    long nowMilis = now.getTime();
                     
-                    sql_query = "insert into token (id, access_token, expiry_time)"
-                            + " VALUES (\"" + id + "\", \"" + token +"\", \"" + expiry_time +"\")";
-                    stmt.executeUpdate(sql_query);
+                    sql_query = "select * from token where "+ "id = \""+ id +"\"";
+                    ResultSet userToken = stmt.executeQuery(sql_query);
+                    
+                    while(userToken.next()){
+                       expiry_time  = userToken.getLong("expiry_time");
+                       token = userToken.getString("access_token");
+                    }
+                    
+                    if(expiry_time > nowMilis) {
+                        expiry_time = nowMilis + 1800000;
+                    }
+                    else {
+                        token = TokenGenerator.randomString(20);
+                        expiry_time = nowMilis + 1800000;
+
+                        sql_query = "UPDATE token set access_token=\"" 
+                                + token + "\", expiry_time=\"" + expiry_time + "\" WHERE id=\"" + id + "\"";
+                        stmt.executeUpdate(sql_query);
+                    }
                     
                     json.put("success", true);
                     json.put("access_token", token);
@@ -124,7 +138,6 @@ public class login extends HttpServlet {
             
         } catch (SQLException ex) {
             PrintWriter out = response.getWriter();
-//            System.out.println("Can't connect to database!");
             json.put("success", false);
             json.put("status", "ERROR : Can't connect to database!");
             json.put("message", ex.getMessage());

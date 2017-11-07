@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -73,20 +74,39 @@ public class validate extends HttpServlet {
                 sql_query = "select * from token where "
                         + "(access_token = \""+ token +"\")";
                 ResultSet result = stmt.executeQuery(sql_query);
-
+                long expiry_time = 0;
                 if (result.next()){
                     int user_id = result.getInt("ID");
                     
-                    json.put("status", "OK");
-                    json.put("user_id", Integer.toString(user_id));
-                    out.print(json.toString());
+                    Timestamp now = new Timestamp(System.currentTimeMillis());
+                    long nowMilis = now.getTime();
+                    expiry_time  = result.getLong("expiry_time");
+                    
+                    if(expiry_time > nowMilis) {
+                        expiry_time = nowMilis + 1800000;
+                        sql_query = "UPDATE token set expiry_time=\"" + expiry_time + "\" WHERE id=\"" + user_id + "\"";
+                        stmt.executeUpdate(sql_query);
+                        
+                        json.put("success", true);
+                        json.put("status", "valid");
+                        json.put("user_id", Integer.toString(user_id));
+                        out.print(json.toString());
+                    }
+                    else {
+                        json.put("success", true);
+                        json.put("status", "expired");
+                        json.put("user_id", Integer.toString(user_id));
+                        out.print(json.toString());
+                    }           
                 }
                 else {
-                    json.put("status", "ERROR");
+                    json.put("success", true);
+                    json.put("status", "invalid");
                     json.put("message", "user doesn't exist");
                     out.print(json.toString());
                 }
             } else {
+                json.put("success", false);
                 json.put("status", "ERROR");
                 json.put("message", "can't connect to the database");
                 out.print(json.toString());

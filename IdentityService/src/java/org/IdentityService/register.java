@@ -121,7 +121,7 @@ public class register extends HttpServlet {
                     
                     Timestamp now = new Timestamp(System.currentTimeMillis());
                     long nowMilis = now.getTime();
-                    long expiry = nowMilis + 1800;
+                    long expiry = nowMilis + 1800000;
                     
                     sql_query = "insert into token (ID, access_token, expiry_time)"
                             + "VALUES (" + user_id + ", \""+ token + "\", " + expiry + ")";

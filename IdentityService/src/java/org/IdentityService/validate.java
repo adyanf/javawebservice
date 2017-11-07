@@ -7,10 +7,15 @@ package org.IdentityService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -56,7 +61,43 @@ public class validate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        JSONObject json = new JSONObject();
+        try {
+            PrintWriter out = response.getWriter();
+            Connection conDB = ConnectDBAccount.getConnection();
+            if (conDB != null){
+                Statement stmt = conDB.createStatement();
+                String sql_query;
+                
+                String token = request.getParameter("token");
+                sql_query = "select * from token where "
+                        + "(access_token = \""+ token +"\")";
+                ResultSet result = stmt.executeQuery(sql_query);
+
+                if (result.next()){
+                    int user_id = result.getInt("ID");
+                    
+                    json.put("status", "OK");
+                    json.put("user_id", Integer.toString(user_id));
+                    out.print(json.toString());
+                }
+                else {
+                    json.put("status", "ERROR");
+                    json.put("message", "user doesn't exist");
+                    out.print(json.toString());
+                }
+            } else {
+                json.put("status", "ERROR");
+                json.put("message", "can't connect to the database");
+                out.print(json.toString());
+            }
+            
+        } catch (SQLException ex) {
+            PrintWriter out = response.getWriter();
+            json.put("status", "ERROR : Can't connect to database!");
+            json.put("message", ex.getMessage());
+            out.print(json.toString());
+        }
     }
 
     /**

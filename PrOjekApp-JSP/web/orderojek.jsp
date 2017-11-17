@@ -4,9 +4,29 @@
     Author     : adyan
 --%>
 
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.PrOjekApp.RestAPIConsumer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
+    <%
+        String token = request.getParameter("token");
+        
+        String API_URL = "http://localhost:8084/IdentityService/validate?";
+        String URLParameters = "token="+ token;
+        RestAPIConsumer rc = new RestAPIConsumer(API_URL, URLParameters);
+        rc.executeGet();
+        JSONObject jsonResponse = rc.getOutput();
+//        out.print(jsonResponse.toString());
+
+        if(!jsonResponse.get("status").toString().equals("valid")) {
+            String Url = "login.jsp";
+            response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", Url);
+        };
+    %>
+
 <!--	<?php
 		require('includes/config.php');
 
@@ -68,13 +88,13 @@
                 </div>
                 <div class="header2">
                     <div class="username">Hi, <span class="username bold"><?php echo $username ?>!</span></div>
-                    <div class="logout"><a href="login.php">Logout</a></div>
+                    <div class="logout"><a href="login.jsp">Logout</a></div>
                 </div>
             </div>
             <div>
                 <div class="menu active">ORDER</div>
-                <div class="menu"><a href="history-order.php?id_active=<?php echo $id_active ?>">HISTORY</a></div>
-                <div class="menu"><a href="profile.php?id_active=<?php echo $id_active ?>">MY PROFILE</a></div>
+                    <div class="menu"><a href="history-order.jsp?token=<%= token %>">HISTORY</a></div>
+                    <div class="menu"><a href="profile.jsp?token=<%= token %>">MY PROFILE</a></div>
             </div>
             <h1>MAKE AN ORDER</h1>
             <div id="box_aktif">

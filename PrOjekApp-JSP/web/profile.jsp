@@ -157,13 +157,13 @@
                     </div>
             </div>
             <div>
-                    <div class="menu"><a href="orderojek.php?token=<%= token %>">ORDER</a></div>
-                    <div class="menu"><a href="history-order.php?token=<%= token %>">HISTORY</a></div>
+                    <div class="menu"><a href="orderojek.jsp?token=<%= token %>">ORDER</a></div>
+                    <div class="menu"><a href="history-order.jsp?token=<%= token %>">HISTORY</a></div>
                     <div class="menu active">MY PROFILE</div>
             </div>
             <div class="my-profile">
                 <h1 class="heading">MY PROFILE</h1>
-                <a href="editprofile.php?token=<%= token %>"><span class="edit"><i class='material-icons'>mode_edit</i></span></a>
+                <a href="editprofile.jsp?token=<%= token %>"><span class="edit"><i class='material-icons'>mode_edit</i></span></a>
             </div>
             <div class="profile-image">
                 <img class="rounded-picture" src="<%= image %>" alt="profile image">
@@ -187,22 +187,8 @@
 <!--            <?php if ($driver == 1){ ?>-->
                 <div class="location">
                     <h2 class="heading">PREFERRED LOCATION</h2>
-                    <a href="editpreferredlocations.php?id_active=<?php echo $id_active ?>"><span class="edit"><i class='material-icons'>mode_edit</i></span></a>
-<!--                    <?php
-                        $sql = "SELECT location FROM driver_locations WHERE ID=$id_active";
-                        $result = mysqli_query($conn, $sql);
-                        echo "<div class='location-list'>";
-                        if (mysqli_num_rows($result) > 0) {
-                            $i = 0;
-                            echo "<ul>";
-                            while($row = mysqli_fetch_assoc($result)) {
-                                echo "<li style='margin-left:". $i*40 ."px;'><i class='material-icons'>play_arrow</i><span>". $row["location"] ."</span></li>";
-                                $i += 1;
-                            }
-                            echo "</ul>";
-                        }
-                        echo "</div>" ;
-                    ?>-->
+                    <a href="editpreferredlocations.jsp?token=<%= token %>"><span class="edit"><i class='material-icons'>mode_edit</i></span></a>
+<!--                    
                 </div>
 <!--            <?php } ?>-->
         </div>

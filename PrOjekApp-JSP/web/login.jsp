@@ -23,6 +23,15 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
         <link rel="stylesheet" href="css/auth.css">
         <script src="js/validation.js"></script>
+        <style>
+            .error {
+                margin: -2px 0px 8px 125px;
+                color: darkred;
+                font-size: 12px;
+                display: none;
+            }
+        </style>
+
     </head>
     <body>
         <div class="apps">
@@ -37,8 +46,8 @@
                     <hr>
                 </div>
             </div>
-            <div class="form-login">
-                <form action="http://localhost:8084/IdentityService/login" method="POST" autocomplete="off" onsubmit="return validateLogin()" name="login">
+<!--            <div class="form-login">
+                <form method="POST" autocomplete="off" onsubmit="return validateLogin()" name="login">
                     <div class="form-group">
                         <label for="username">Username </label>                            
                         <input id="username" type="text" name="username" placeholder="your username">
@@ -56,7 +65,30 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div>-->
+            <div class="form-login">
+                <form method="POST" autocomplete="off" name="login">
+                    <div class="form-group">
+                        <label for="username">Email </label>                            
+                        <input id="username" type="text" name="username" placeholder="your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password </label>                            
+                        <input id="password" type="password" name="password" placeholder="your password" pattern=".{5,10}" title="5 to 10 characters">                        
+                    </div>
+                    <div id="error-password" class="error">
+                        <span>*Sorry, your yousername or password was incorrect</span>
+                    </div>
+                </form>
+                    <div class="action">
+                        <div class="register">
+                            <a href="register.jsp">Don't have an account ?</a>
+                        </div>
+                        <div class="submit">
+                            <input type="submit" name="submit" onclick="login123()" value="GO!">                            
+                        </div>
+                    </div>
+            </div>  
         </div>
     </body>
     <% if (request.getParameter("message") != null){

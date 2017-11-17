@@ -7,49 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<!--    <?php
-        require('includes/config.php');
 
-        $id_active = $_GET["id_active"];
-        $sql = "SELECT driver FROM users WHERE ID=$id_active LIMIT 1";
-
-        $result = mysqli_query($conn, $sql);
-        while($row = mysqli_fetch_assoc($result)) {
-            $driver = $row["driver"];
-        }
-
-        if ($driver == 0){
-            header('Location: profile.php?id_active=' . $id_active);
-            echo "<script>console.log(" . $driver . ")</script>";    
-            exit;
-        }
-
-        if(isset($_POST["back"])){
-            header('Location: profile.php?id_active=' . $id_active);
-            echo "<script>console.log('back')</script>";    
-            exit;
-        }
-
-        if(isset($_POST["submit"])) {
-            $location = $_POST["location"];
-
-            $sql = "INSERT INTO driver_locations (ID, location)
-            VALUES ('$id_active', '$location')";
-
-            if ($conn->query($sql) === TRUE) {
-                header('Location: editpreferredlocations.php?id_active=' . $id_active);
-                echo "<script>console.log('get in')</script>";                
-                exit;                
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-        }
-
-        $sql = "SELECT location FROM driver_locations WHERE ID=$id_active";
-
-        $result = mysqli_query($conn, $sql);
-        echo "<script>var id = " . $id_active . ";</script>"
-    ?>-->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Profile</title>

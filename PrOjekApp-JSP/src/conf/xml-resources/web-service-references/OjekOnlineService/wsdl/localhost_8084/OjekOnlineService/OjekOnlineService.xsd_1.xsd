@@ -157,18 +157,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="get_all_driver">
-<xs:sequence>
-<xs:element name="token" type="xs:string" minOccurs="0" />
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="get_all_driverResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:driver" minOccurs="0" maxOccurs="unbounded" />
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="get_preferred_driver">
 <xs:sequence>
 <xs:element name="token" type="xs:string" minOccurs="0" />
@@ -177,6 +165,18 @@
 </xs:complexType>
 
 <xs:complexType name="get_preferred_driverResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:driver" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_all_driver">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_all_driverResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:driver" minOccurs="0" maxOccurs="unbounded" />
 </xs:sequence>
@@ -198,18 +198,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="get_order_hstory">
-<xs:sequence>
-<xs:element name="token" type="xs:string" minOccurs="0" />
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="get_order_hstoryResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:transaction" minOccurs="0" maxOccurs="unbounded" />
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="get_not_preferred_driver">
 <xs:sequence>
 <xs:element name="token" type="xs:string" minOccurs="0" />
@@ -220,6 +208,18 @@
 <xs:complexType name="get_not_preferred_driverResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:driver" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_order_hstory">
+<xs:sequence>
+<xs:element name="token" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="get_order_hstoryResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transaction" minOccurs="0" maxOccurs="unbounded" />
 </xs:sequence>
 </xs:complexType>
 

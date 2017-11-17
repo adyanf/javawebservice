@@ -68,6 +68,39 @@ function validateEmail(email) {
     return re.test(email);
 }
 
+function login123(){
+    console.log("yuhu");
+    var username = document.forms["login"]["username"].value;
+    var password = document.forms["login"]["password"].value;
+
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+            if (response.success === true) {
+                console.log("berhasil login");
+                location.href = "profile.jsp?token="+response.access_token;
+            }
+            else {
+                console.log("gagal login");
+                document.getElementById('error-password').style.display = "block";
+            }
+        }
+    };
+    xmlhttp.open("POST", "http://localhost:8084/IdentityService/login", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("username="+username+"&password="+password+"&test=test123");
+}
+
+
+
 //function getEmailValidation(){
 //    var email = document.getElementById("email");
 //    console.log(email.value);
@@ -103,15 +136,15 @@ function validateEmail(email) {
 //    }	
 //}
 
-document.addEventListener('DOMContentLoaded', function() {
-   setInterval(function(){
-        if (document.getElementById("name").value.length > 0 && document.getElementById("checkUsername").style.display !== "none" && 
-        document.getElementById("checkEmail").style.display !== "none" && document.getElementById("password").value.length > 0 && 
-        document.getElementById("password_conf").value.length > 0 && document.getElementById("phone").value.length > 0){
-            document.getElementById("submit").disabled = false;
-        }
-        else {
-            document.getElementById("submit").disabled = true;
-        }
-   }, 500);    
- }, false);
+//document.addEventListener('DOMContentLoaded', function() {
+//   setInterval(function(){
+//        if (document.getElementById("name").value.length > 0 && document.getElementById("checkUsername").style.display !== "none" && 
+//        document.getElementById("checkEmail").style.display !== "none" && document.getElementById("password").value.length > 0 && 
+//        document.getElementById("password_conf").value.length > 0 && document.getElementById("phone").value.length > 0){
+//            document.getElementById("submit").disabled = false;
+//        }
+//        else {
+//            document.getElementById("submit").disabled = true;
+//        }
+//   }, 500);    
+// }, false);

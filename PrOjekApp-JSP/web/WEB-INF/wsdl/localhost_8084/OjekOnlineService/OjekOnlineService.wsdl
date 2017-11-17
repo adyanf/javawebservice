@@ -4,29 +4,11 @@
 <xsd:import namespace="http://OjekOnlineService.org/" schemaLocation="http://localhost:8084/OjekOnlineService/OjekOnlineService?xsd=1" />
 </xsd:schema>
 </types>
-<message name="get_profile">
-<part name="parameters" element="tns:get_profile" />
+<message name="get_not_preferred_driver">
+<part name="parameters" element="tns:get_not_preferred_driver" />
 </message>
-<message name="get_profileResponse">
-<part name="parameters" element="tns:get_profileResponse" />
-</message>
-<message name="get_driver_locations">
-<part name="parameters" element="tns:get_driver_locations" />
-</message>
-<message name="get_driver_locationsResponse">
-<part name="parameters" element="tns:get_driver_locationsResponse" />
-</message>
-<message name="get_order_hstory">
-<part name="parameters" element="tns:get_order_hstory" />
-</message>
-<message name="get_order_hstoryResponse">
-<part name="parameters" element="tns:get_order_hstoryResponse" />
-</message>
-<message name="get_all_driver">
-<part name="parameters" element="tns:get_all_driver" />
-</message>
-<message name="get_all_driverResponse">
-<part name="parameters" element="tns:get_all_driverResponse" />
+<message name="get_not_preferred_driverResponse">
+<part name="parameters" element="tns:get_not_preferred_driverResponse" />
 </message>
 <message name="get_driver_history">
 <part name="parameters" element="tns:get_driver_history" />
@@ -40,11 +22,11 @@
 <message name="update_driver_locationResponse">
 <part name="parameters" element="tns:update_driver_locationResponse" />
 </message>
-<message name="get_not_preferred_driver">
-<part name="parameters" element="tns:get_not_preferred_driver" />
+<message name="get_driver_locations">
+<part name="parameters" element="tns:get_driver_locations" />
 </message>
-<message name="get_not_preferred_driverResponse">
-<part name="parameters" element="tns:get_not_preferred_driverResponse" />
+<message name="get_driver_locationsResponse">
+<part name="parameters" element="tns:get_driver_locationsResponse" />
 </message>
 <message name="add_driver_location">
 <part name="parameters" element="tns:add_driver_location" />
@@ -64,28 +46,34 @@
 <message name="update_profileResponse">
 <part name="parameters" element="tns:update_profileResponse" />
 </message>
+<message name="get_order_hstory">
+<part name="parameters" element="tns:get_order_hstory" />
+</message>
+<message name="get_order_hstoryResponse">
+<part name="parameters" element="tns:get_order_hstoryResponse" />
+</message>
+<message name="get_all_driver">
+<part name="parameters" element="tns:get_all_driver" />
+</message>
+<message name="get_all_driverResponse">
+<part name="parameters" element="tns:get_all_driverResponse" />
+</message>
 <message name="add_order">
 <part name="parameters" element="tns:add_order" />
 </message>
 <message name="add_orderResponse">
 <part name="parameters" element="tns:add_orderResponse" />
 </message>
+<message name="get_profile">
+<part name="parameters" element="tns:get_profile" />
+</message>
+<message name="get_profileResponse">
+<part name="parameters" element="tns:get_profileResponse" />
+</message>
 <portType name="OjekOnlineService">
-<operation name="get_profile">
-<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_profileRequest" message="tns:get_profile" />
-<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_profileResponse" message="tns:get_profileResponse" />
-</operation>
-<operation name="get_driver_locations">
-<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_driver_locationsRequest" message="tns:get_driver_locations" />
-<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_driver_locationsResponse" message="tns:get_driver_locationsResponse" />
-</operation>
-<operation name="get_order_hstory">
-<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_order_hstoryRequest" message="tns:get_order_hstory" />
-<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_order_hstoryResponse" message="tns:get_order_hstoryResponse" />
-</operation>
-<operation name="get_all_driver">
-<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_all_driverRequest" message="tns:get_all_driver" />
-<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_all_driverResponse" message="tns:get_all_driverResponse" />
+<operation name="get_not_preferred_driver">
+<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_not_preferred_driverRequest" message="tns:get_not_preferred_driver" />
+<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_not_preferred_driverResponse" message="tns:get_not_preferred_driverResponse" />
 </operation>
 <operation name="get_driver_history">
 <input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_driver_historyRequest" message="tns:get_driver_history" />
@@ -95,9 +83,9 @@
 <input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/update_driver_locationRequest" message="tns:update_driver_location" />
 <output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/update_driver_locationResponse" message="tns:update_driver_locationResponse" />
 </operation>
-<operation name="get_not_preferred_driver">
-<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_not_preferred_driverRequest" message="tns:get_not_preferred_driver" />
-<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_not_preferred_driverResponse" message="tns:get_not_preferred_driverResponse" />
+<operation name="get_driver_locations">
+<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_driver_locationsRequest" message="tns:get_driver_locations" />
+<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_driver_locationsResponse" message="tns:get_driver_locationsResponse" />
 </operation>
 <operation name="add_driver_location">
 <input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/add_driver_locationRequest" message="tns:add_driver_location" />
@@ -111,41 +99,26 @@
 <input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/update_profileRequest" message="tns:update_profile" />
 <output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/update_profileResponse" message="tns:update_profileResponse" />
 </operation>
+<operation name="get_order_hstory">
+<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_order_hstoryRequest" message="tns:get_order_hstory" />
+<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_order_hstoryResponse" message="tns:get_order_hstoryResponse" />
+</operation>
+<operation name="get_all_driver">
+<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_all_driverRequest" message="tns:get_all_driver" />
+<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_all_driverResponse" message="tns:get_all_driverResponse" />
+</operation>
 <operation name="add_order">
 <input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/add_orderRequest" message="tns:add_order" />
 <output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/add_orderResponse" message="tns:add_orderResponse" />
 </operation>
+<operation name="get_profile">
+<input wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_profileRequest" message="tns:get_profile" />
+<output wsam:Action="http://OjekOnlineService.org/OjekOnlineService/get_profileResponse" message="tns:get_profileResponse" />
+</operation>
 </portType>
 <binding name="OjekOnlineServicePortBinding" type="tns:OjekOnlineService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
-<operation name="get_profile">
-<soap:operation soapAction="" />
-<input>
-<soap:body use="literal" />
-</input>
-<output>
-<soap:body use="literal" />
-</output>
-</operation>
-<operation name="get_driver_locations">
-<soap:operation soapAction="" />
-<input>
-<soap:body use="literal" />
-</input>
-<output>
-<soap:body use="literal" />
-</output>
-</operation>
-<operation name="get_order_hstory">
-<soap:operation soapAction="" />
-<input>
-<soap:body use="literal" />
-</input>
-<output>
-<soap:body use="literal" />
-</output>
-</operation>
-<operation name="get_all_driver">
+<operation name="get_not_preferred_driver">
 <soap:operation soapAction="" />
 <input>
 <soap:body use="literal" />
@@ -172,7 +145,7 @@
 <soap:body use="literal" />
 </output>
 </operation>
-<operation name="get_not_preferred_driver">
+<operation name="get_driver_locations">
 <soap:operation soapAction="" />
 <input>
 <soap:body use="literal" />
@@ -208,7 +181,34 @@
 <soap:body use="literal" />
 </output>
 </operation>
+<operation name="get_order_hstory">
+<soap:operation soapAction="" />
+<input>
+<soap:body use="literal" />
+</input>
+<output>
+<soap:body use="literal" />
+</output>
+</operation>
+<operation name="get_all_driver">
+<soap:operation soapAction="" />
+<input>
+<soap:body use="literal" />
+</input>
+<output>
+<soap:body use="literal" />
+</output>
+</operation>
 <operation name="add_order">
+<soap:operation soapAction="" />
+<input>
+<soap:body use="literal" />
+</input>
+<output>
+<soap:body use="literal" />
+</output>
+</operation>
+<operation name="get_profile">
 <soap:operation soapAction="" />
 <input>
 <soap:body use="literal" />

@@ -25,8 +25,8 @@
             RestAPIConsumer rc = new RestAPIConsumer(API_URL, URLParameters);
             rc.executePost();
             JSONObject jsonResponse = rc.getOutput();
-            
-            String status = (String)jsonResponse.get("status");
+            System.out.println(jsonResponse);
+            String status = (String) jsonResponse.get("status");
             if (status.equals("OK")){
                 String token = (String)jsonResponse.get("token");
                 response.sendRedirect("http://localhost:8084/PrOjekApp-JSP/profile.jsp?token=" + token);
@@ -46,6 +46,7 @@
         <link rel="stylesheet" href="css/auth.css">
     </head>
     <body>
+        <% // out.print(jsonResponse); %>
         <div class="apps">
             <div class="form-heading">
                 <div class="heading-left">
@@ -87,7 +88,7 @@
                     <input type="checkbox" name="driver" value="true"> Also sign me up as a driver!
                     <div class="action">
                         <div class="login">
-                            <a href="login.php">Already have an account ?</a>
+                            <a href="login.jsp">Already have an account ?</a>
                         </div>
                         <div class="submit">
                             <input id="submit" type="submit" name="submit" value="REGISTER">                            

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 17 Nov 2017 pada 11.23
--- Versi Server: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: Nov 17, 2017 at 10:40 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `account`
+-- Table structure for table `account`
 --
 
 CREATE TABLE `account` (
@@ -40,12 +40,12 @@ CREATE TABLE `account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `account`
+-- Dumping data for table `account`
 --
 
 INSERT INTO `account` (`ID`, `name`, `username`, `email`, `password`, `phone_number`, `driver`, `image`) VALUES
-(1, 'Bocan', 'bocan', 'bocan@gmail.com', '123', '081123456789', 0, '25'),
-(2, 'Hesen', 'hesen', 'hesen@gmail.com', '111', '081987654321', 1, '30'),
+(1, 'Bocan', 'bocan', 'bocan@gmail.com', '12345678', '081123456789', 0, './img/profile-placeholder.png'),
+(2, 'Hesen', 'hesen', 'hesen@gmail.com', 'hesen111', '081987654321', 1, './img/profile-placeholder.png'),
 (3, 'Adya Naufal Fikri', 'adyanf', 'adyanf@gmail.com', 'test123', '082127896113', 1, './img/profile-placeholder.png'),
 (4, 'Adya Naufal Fikri', 'adyanaufalfikri', 'test123@gmail.com', 'test123', '098817873111', 0, './img/profile-placeholder.png'),
 (6, 'Adya1019', 'adyanaufalF', 'adyanf1019@gmail.com', 'test123', '09791873111', 1, './img/profile-placeholder.png'),
@@ -75,7 +75,7 @@ INSERT INTO `account` (`ID`, `name`, `username`, `email`, `password`, `phone_num
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `token`
+-- Table structure for table `token`
 --
 
 CREATE TABLE `token` (
@@ -85,7 +85,7 @@ CREATE TABLE `token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `token`
+-- Dumping data for table `token`
 --
 
 INSERT INTO `token` (`ID`, `access_token`, `expiry_time`) VALUES
@@ -128,7 +128,8 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;COMMIT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

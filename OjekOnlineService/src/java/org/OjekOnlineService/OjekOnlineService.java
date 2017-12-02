@@ -10,6 +10,12 @@ import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 
 /**
@@ -49,19 +55,45 @@ public class OjekOnlineService {
      */
     @WebMethod(operationName = "get_driver_locations")
     public Driver get_driver_locations(@WebParam(name = "token") String token) {
-        String API_URL = "http://localhost:8084/IdentityService/validate?";
+        String API_URL = "http://localhost:8084/IdentityService/userid?";
         String URLParameters = "token="+ token;
         RestAPIConsumer rc = new RestAPIConsumer(API_URL, URLParameters);
         rc.executePost();
         JSONObject jsonResponse = rc.getOutput();
         
-        int user_id = Integer.parseInt((String)jsonResponse.get("user_id"));
-        
-        String name = (String)jsonResponse.get("name");
-        
+        System.out.println("Hello");
+        int user_id = Integer.parseInt((String) jsonResponse.get("user_id"));
+        String name = "Stranger";
+        int total_rating = 0;
+        int total_passangers = 0;
+        List<String> locations = new ArrayList<String>();
+        try {
+            String query = "select * from drivers where ID="+ user_id;
+            Statement stmt = conDB.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()){
+                name = rs.getString("name");
+                total_rating = rs.getInt("total_rating");
+                total_passangers = rs.getInt("total_passangers");
+            }
+            
+            query = "select * from driver_locations where ID=" + user_id;
+            rs = stmt.executeQuery(query);
+            while (rs.next()){
+                locations.add(rs.getString("location"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OjekOnlineService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(user_id);
+        System.out.println(name);
+        System.out.println(total_rating);
+        System.out.println(total_passangers);
+        Driver result = new Driver(user_id, name, total_rating, total_passangers, (ArrayList<String>) locations);
+
         //Driver  output = new Driver(user_id);
         //TODO write your implementation code here:
-        return null;
+        return result;
     }
 
     /**

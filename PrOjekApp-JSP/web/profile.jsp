@@ -4,6 +4,8 @@
     Author     : adyan
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.PrOjekApp.RestAPIConsumer"%>
@@ -20,8 +22,8 @@
             rc.executeGet();
             JSONObject jsonResponse = rc.getOutput();
             
-            String status = (String)jsonResponse.get("status");
-            String message = (String)jsonResponse.get("message");
+            String status = (String) jsonResponse.get("status");
+            String message = (String) jsonResponse.get("message");
             response.sendRedirect("http://localhost:8084/PrOjekApp-JSP/login.jsp?message="+ message);
         }
 
@@ -45,13 +47,15 @@
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        List<String> locations = new ArrayList<String>();
+        int total_rating = 0;
+        int total_passangers = 0;
         if (driver == 1){
-            ArrayList<String> location = null;
-            int total_rating = 0;
-            int total_passanger = 0;
             try {
                 org.ojekonlineservice.Driver resultDriver = port.getDriverLocations(token);
-                out.println("Result = "+resultDriver);
+                total_rating = resultDriver.getTotalRating();
+                total_passangers = resultDriver.getTotalPassangers();
+                locations = resultDriver.getLocation();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -173,24 +177,28 @@
                 <p><%= name %></p>
                 <%
                     if (driver == 1){
-                        out.println("<p>Driver</p>");
+                        out.println("<p>Driver | " + total_rating +" (" + total_passangers + " votes)</p>");
                     }
                 %>
-                <!--                
-<?php if ($driver == 1){
-                    $rating = ($total_passangers == 0) ? 0 : $total_rating/$total_passangers; 
-                    echo "<p>Driver | <span>". $rating . "</span> (". $total_passangers ." votes)</p>" ;
-                } ?>-->
                 <p><%= email %></p>
                 <p><%= phone_number %></p>
             </div>
-<!--            <?php if ($driver == 1){ ?>-->
                 <div class="location">
                     <h2 class="heading">PREFERRED LOCATION</h2>
                     <a href="editpreferredlocations.jsp?token=<%= token %>"><span class="edit"><i class='material-icons'>mode_edit</i></span></a>
-<!--                    
+                    <% 
+                        out.println("<div class='location-list'>");
+                        if (driver == 1){
+                            out.println("<ul>");
+                            for (int i = 0; i < locations.size(); i++) {
+                                String element = locations.get(i);
+                                out.println("<li style='margin-left: 30px'>" + element + "</li>");
+                            }
+                            out.println("</ul>");
+                        }
+                        out.println("</div>");
+                    %>
                 </div>
-<!--            <?php } ?>-->
         </div>
         <script src="js/history.js" type="text/javascript"></script>
     </body>
